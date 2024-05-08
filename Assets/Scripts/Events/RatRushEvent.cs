@@ -8,13 +8,14 @@ public class RatRushEvent : MonoBehaviour
 
     private float speed = 7.5f;
     private bool rushActive = false;
+    private bool reachedTarget = false;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<PlayerView>() != null)
         {
-            onRatRush();
             EventService.Instance.OnRatRush.InvokeEvent();
+            onRatRush();
             GameService.Instance.GetSoundView().PlaySoundEffects(soundToPlay);
             GetComponent<Collider>().enabled = false;
         }

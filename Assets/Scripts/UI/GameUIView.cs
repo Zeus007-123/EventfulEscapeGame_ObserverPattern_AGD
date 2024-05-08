@@ -21,48 +21,48 @@ public class GameUIView : MonoBehaviour
 
     private void OnEnable()
     {
-        EventService.Instance.OnKeyPickedUp.AddListener(OnKeyEquipped);
-        EventService.Instance.OnLightsOffByGhostEvent.AddListener(SetRedVignette);
-        EventService.Instance.OnPlayerEscapedEvent.AddListener(OnPlayerEscaped);
-        EventService.Instance.OnPlayerDeathEvent.AddListener(SetRedVignette);
-        EventService.Instance.OnPlayerDeathEvent.AddListener(OnPlayerDeath);
-        EventService.Instance.OnRatRush.AddListener(SetRedVignette);
-        EventService.Instance.OnSkullDrop.AddListener(SetRedVignette);
+        EventService.Instance.OnKeyPickedUp.AddListener(onKeyEquipped);
+        EventService.Instance.OnLightsOffByGhostEvent.AddListener(setRedVignette);
+        EventService.Instance.OnPlayerEscapedEvent.AddListener(onPlayerEscaped);
+        EventService.Instance.OnPlayerDeathEvent.AddListener(setRedVignette);
+        EventService.Instance.OnPlayerDeathEvent.AddListener(onPlayerDeath);
+        EventService.Instance.OnRatRush.AddListener(setRedVignette);
+        EventService.Instance.OnSkullDrop.AddListener(setRedVignette);
 
-        tryAgainButton.onClick.AddListener(OnTryAgainButtonClicked);
-        quitButton.onClick.AddListener(OnQuitButtonClicked);
+        tryAgainButton.onClick.AddListener(onTryAgainButtonClicked);
+        quitButton.onClick.AddListener(onQuitButtonClicked);
     }
 
     private void OnDisable()
     {
-        EventService.Instance.OnKeyPickedUp.RemoveListener(OnKeyEquipped);
-        EventService.Instance.OnLightsOffByGhostEvent.RemoveListener(SetRedVignette);
-        EventService.Instance.OnPlayerEscapedEvent.RemoveListener(OnPlayerEscaped);
-        EventService.Instance.OnPlayerDeathEvent.RemoveListener(SetRedVignette);
-        EventService.Instance.OnPlayerDeathEvent.RemoveListener(OnPlayerDeath);
-        EventService.Instance.OnRatRush.RemoveListener(SetRedVignette);
-        EventService.Instance.OnSkullDrop.RemoveListener(SetRedVignette);
+        EventService.Instance.OnKeyPickedUp.RemoveListener(onKeyEquipped);
+        EventService.Instance.OnLightsOffByGhostEvent.RemoveListener(setRedVignette);
+        EventService.Instance.OnPlayerEscapedEvent.RemoveListener(onPlayerEscaped);
+        EventService.Instance.OnPlayerDeathEvent.RemoveListener(setRedVignette);
+        EventService.Instance.OnPlayerDeathEvent.RemoveListener(onPlayerDeath);
+        EventService.Instance.OnRatRush.RemoveListener(setRedVignette);
+        EventService.Instance.OnSkullDrop.RemoveListener(setRedVignette);
     }
 
     public void UpdateInsanity(float playerSanity) => insanityImage.rectTransform.localScale = new Vector3(1, playerSanity, 1);
-    private void OnKeyEquipped(int keys) => keysFoundText.SetText($"Keys Found: {keys}/3");
-    private void OnQuitButtonClicked() => Application.Quit();
-    private void OnTryAgainButtonClicked() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    private void onKeyEquipped(int keys) => keysFoundText.SetText($"Keys Found: {keys}/3");
+    private void onQuitButtonClicked() => Application.Quit();
+    private void onTryAgainButtonClicked() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
-    private void SetRedVignette()
+    private void setRedVignette()
     {
         redVignette.enabled = true;
         redVignette.canvasRenderer.SetAlpha(0.5f);
         redVignette.CrossFadeAlpha(0, 5, false);
     }
 
-    private void OnPlayerDeath()
+    private void onPlayerDeath()
     {
         gameEndText.SetText("Game Over");
         gameEndPanel.SetActive(true);
     }
 
-    private void OnPlayerEscaped()
+    private void onPlayerEscaped()
     {
         gameEndText.SetText("You Escaped");
         gameEndPanel.SetActive(true);

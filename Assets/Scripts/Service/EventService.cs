@@ -31,7 +31,6 @@ public class EventService
         OnRatRush = new EventController();
         OnSkullDrop = new EventController();
         OnPotionDrinkEvent = new EventController<int>();
-
         OnPlayerEscapedEvent = new EventController();
         OnPlayerDeathEvent = new EventController();
     }
